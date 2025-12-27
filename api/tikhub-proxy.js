@@ -16,7 +16,7 @@ module.exports = async function (req, res) {
   // 2. 处理 OPTIONS 预检请求
   if (req.method === 'OPTIONS') {
     res.status(204).end();
-    return;  
+    return;
   }
 
   // 3. 获取参数
@@ -24,7 +24,7 @@ module.exports = async function (req, res) {
 
   if (!xhsLink) {
     res.status(400).json({ code: 400, msg: "Missing url parameter" });
-    return;  
+    return;
   }
 
   console.log(`\n[Vercel Function] 收到链接: ${xhsLink}，正在呼叫 Coze...`);
@@ -99,13 +99,13 @@ module.exports = async function (req, res) {
           code: 200,
           msg: "Success",
           data: { image_list: finalImages }
-      });    
+      });
 
-    } else {    
+    } else {
       res.status(500).json({ code: 500, msg: result.msg || "Coze Workflow Error" });
     }
   } catch (error) {
     console.error(`❌ 处理错误:`, error);
     res.status(500).json({ code: 500, msg: "Internal Server Error: " + error.message });
   }
-};    
+};
